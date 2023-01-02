@@ -1,7 +1,7 @@
 class Solution {
 public:
     string getHint(string secret, string guess) {
-    // Problem Link : https://leetcode.com/problems/bulls-and-cows/
+    // Problem Link: https://leetcode.com/problems/bulls-and-cows/
         unordered_map<int,int> map1;
         unordered_map<int,int> map2;
         for(int i=0;i<secret.length();i++){
