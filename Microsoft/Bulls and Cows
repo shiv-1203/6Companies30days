@@ -1,0 +1,38 @@
+class Solution {
+public:
+    string getHint(string secret, string guess) {
+    // Problem Link : https://leetcode.com/problems/bulls-and-cows/
+        unordered_map<int,int> map1;
+        unordered_map<int,int> map2;
+        for(int i=0;i<secret.length();i++){
+            map1[secret[i]]++;
+            map2[guess[i]]++;
+        }
+        int bull=0,cow=0;
+        for(int i=0;i<secret.length();i++){
+            if(secret[i]==guess[i]){
+                bull++;
+                map1[secret[i]]--;
+                map2[guess[i]]--;
+            }
+        }
+        for(auto x:map1){
+            if(x.second==0){
+                continue;
+            }
+            if(map2.find(x.first)!=map2.end()){
+                cow+=min(x.second,map2[x.first]);
+            }
+        }
+        stringstream ss;
+        ss<<bull;
+        string s1;
+        ss>>s1;
+        stringstream ss1;
+        ss1<<cow;
+        string s2;
+        ss1>>s2;
+        s1=s1+"A"+s2+"B";
+        return s1;
+    }
+};
