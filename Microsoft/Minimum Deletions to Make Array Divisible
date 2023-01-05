@@ -1,0 +1,32 @@
+class Solution {
+public:
+    int gcd(int a,int b){
+        if(a==0){
+            return b;
+        }
+        return gcd(b%a,a);
+    }
+    int commondiv(int a,int b){
+        int n=gcd(a,b),res=0;
+        return n;
+    }
+    int minOperations(vector<int>& nums, vector<int>& numsDivide) {
+        sort(nums.begin(),nums.end());
+        int prev=1,curr=1,res=numsDivide[0];
+        if(numsDivide.size()>1){
+            prev=commondiv(numsDivide[0],numsDivide[1]);
+            res=min(res,prev);
+        }
+        for(int i=2;i<numsDivide.size();i++){
+            curr=commondiv(numsDivide[i],numsDivide[i-1]);
+            res=min(res,gcd(prev,curr));
+            prev=curr;
+        }
+        for(int i=0;i<nums.size();i++){
+            if(res%nums[i]==0){
+                return i;
+            }
+        }
+        return -1;
+    }
+};
